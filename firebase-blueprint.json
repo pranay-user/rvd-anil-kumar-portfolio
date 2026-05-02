@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "Message": {
+      "title": "Message",
+      "description": "A contact form message from a potential client.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the sender."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the sender."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of the message."
+        },
+        "message": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the message was sent."
+        }
+      },
+      "required": ["name", "email", "subject", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Collection of contact form submissions."
+    }
+  }
+}

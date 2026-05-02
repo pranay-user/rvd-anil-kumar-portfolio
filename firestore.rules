@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'subject', 'message', 'createdAt']) &&
+             data.keys().size() == 5 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 100 &&
+             data.subject is string && data.subject.size() > 0 && data.subject.size() <= 200 &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 5000 &&
+             data.createdAt == request.time;
+    }
+
+    // Messages Collection
+    match /messages/{messageId} {
+      // Allow anyone to create a message (it's a contact form)
+      // We don't require auth for the public contact form, but we validate strictly.
+      allow create: if isValidId(messageId) && isValidMessage(incoming());
+      
+      // Only admins should be able to read or delete messages
+      // For this app, we'll assume the user might want to read them via Firebase Console.
+      // If we had an admin UI, we'd add admin checks here.
+      allow read, delete, update: if false; 
+    }
+  }
+}
