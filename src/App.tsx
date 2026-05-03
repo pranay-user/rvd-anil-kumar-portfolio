@@ -24,7 +24,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
 import profilePic from "./assets/profile.jpg";
 import bahabahubali from "./assets/projects/balabahubali.jpeg";
-import dinostur from "./assets/projects/dinostar.jpeg";
+import dinostur from "./assets/projects/Dinostar.jpeg";
 import dinorock from "./assets/projects/Dinorock.jpeg";
 import gattu_battu from "./assets/projects/gattubattu.jpeg";
 import ladybug from "./assets/projects/MLB.jpeg";
