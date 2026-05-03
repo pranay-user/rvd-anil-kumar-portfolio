@@ -38,7 +38,7 @@ import dinda_novi from "./assets/projects/dindanovi.jpeg";
 import pirata_capitano from "./assets/projects/pirate.jpeg";
 import power_players from "./assets/projects/powerplayers.jpeg";
 import byjus from "./assets/projects/Byjus.jpeg";
-import denver from "./assets/projects/denver.jpeg";
+import denver from "./assets/projects/Denver.jpeg";
 import robin_hood from "./assets/projects/Robinhood.jpeg";
 
 enum OperationType {
