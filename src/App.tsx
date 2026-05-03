@@ -475,7 +475,7 @@ export default function App() {
                RVD <span className="text-primary italic">ANIL KUMAR</span>
             </div>
             <p className="text-sm text-gray-500 uppercase tracking-widest">
-               © {new Date().getFullYear()} — Crafted with precision
+               © {new Date().getFullYear()} — Developed By RVD Anil Kumar. All rights reserved.
             </p>
             <div className="flex gap-6">
                <a href="#" className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors">Privacy</a>
