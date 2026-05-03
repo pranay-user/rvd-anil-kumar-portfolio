@@ -23,6 +23,23 @@ import { db } from "./lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
 import profilePic from "./assets/profile.jpg";
+import bahabahubali from "./assets/projects/balabahubali.jpeg";
+import dinostur from "./assets/projects/dinostar.jpeg";
+import dinorock from "./assets/projects/Dinorock.jpeg";
+import gattu_battu from "./assets/projects/gattubattu.jpeg";
+import ladybug from "./assets/projects/MLB.jpeg";
+import rudra from "./assets/projects/Rudra.jpeg";
+import super_speedo from "./assets/projects/kikosuperspeedo.jpeg";
+import titus from "./assets/projects/titus.jpeg";
+import benjaman from "./assets/projects/Benjiman.jpeg";
+import big_nate from "./assets/projects/Bignate.jpeg";
+import bga from "./assets/projects/Beargrylls.jpeg";
+import dinda_novi from "./assets/projects/dindanovi.jpeg";
+import pirata_capitano from "./assets/projects/pirate.jpeg";
+import power_players from "./assets/projects/powerplayers.jpeg";
+import byjus from "./assets/projects/Byjus.jpeg";
+import denver from "./assets/projects/denver.jpeg";
+import robin_hood from "./assets/projects/Robinhood.jpeg";
 
 enum OperationType {
   CREATE = 'create',
@@ -51,14 +68,29 @@ function handleFirestoreError(error: unknown, operationType: OperationType, path
   throw new Error(JSON.stringify(errInfo));
 }
 
+
+
 const PROJECTS = [
-  "Kiko Super Speedo", "Denver", "Lady Bug", "Power Players", 
-  "Byju’s", "Titus", "Robin Hood", "Bala Bahubali", 
-  "Dinda and Novi", "Gattu Battu", "Dinostur", "DinoRock", 
-  "Rudra", "Pirata & Capitano", "Benjaman", 
-  "Big nate (Nickelodeon Cartoon Universe)", 
-  "BGA (Bear Grylls Young Adventure)"
+  { name: "Kiko Super Speedo", image: super_speedo },
+  { name: "Denver", image: denver },
+  { name: "Lady Bug", image: ladybug },
+  { name: "Power Players", image: power_players },
+  { name: "Byju’s", image: byjus },
+  { name: "Titus", image: titus },
+  { name: "Robin Hood", image: robin_hood },
+  { name: "Bala Bahubali", image: bahabahubali },
+  { name: "Dinda and Novi", image: dinda_novi },
+  { name: "Gattu Battu", image: gattu_battu },
+  { name: "Dinostur", image: dinostur },
+  { name: "DinoRock", image: dinorock },
+  { name: "Rudra", image: rudra },
+  { name: "Pirata & Capitano", image: pirata_capitano },
+  { name: "Benjaman", image: benjaman },
+  { name: "Big nate", image: big_nate },
+  { name: "BGA (Bear Grylls)", image: bga },
 ];
+
+
 
 const SKILLS = [
   { name: "Houdini", level: 95, icon: <Box className="w-5 h-5" /> },
@@ -310,20 +342,31 @@ export default function App() {
       </section>
 
       {/* Projects Grid */}
-      <section id="projects" className="py-20 px-6 max-w-7xl mx-auto">
+            <section id="projects" className="py-20 px-6 max-w-7xl mx-auto">
         <SectionHeader title="Project Registry" subtitle="Notable contributions in film and television" />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {PROJECTS.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="aspect-square bg-white/5 border border-white/10 p-6 rounded-xl flex items-center justify-center text-center group relative overflow-hidden"
+              className="group relative aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all cursor-pointer"
             >
-              <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
-              <p className="text-sm font-bold text-gray-300 group-hover:text-white transition-colors">{project}</p>
+              <img 
+                src={project.image} 
+                alt={project.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1 opacity-0 group-hover:opacity-100 transition-opacity">VFX Production</p>
+                <h3 className="text-lg font-bold text-white leading-tight">{project.name}</h3>
+              </div>
+              <div className="absolute top-4 right-4 p-2 bg-surface/80 backdrop-blur-md rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
+                <ExternalLink className="w-4 h-4 text-primary" />
+              </div>
             </motion.div>
           ))}
         </div>
